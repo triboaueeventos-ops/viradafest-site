@@ -1,0 +1,41 @@
+SITE VIRADA FEST 2027 — COMO PUBLICAR E EDITAR
+==============================================
+
+PUBLICAR (FileZilla)
+1. ANTES: no servidor, baixe uma cópia do index.html atual (backup).
+2. Envie para a pasta raiz do site (a mesma onde está o index.html de hoje):
+   - index.html
+   - privacidade.html
+   - termos.html
+   - favicon.svg
+   - og-image.jpg
+   - a pasta assets (inteira)
+   - a pasta ingressos (inteira) -> cria viradafest.com.br/ingressos (usa o link e a data do config.js)
+3. Abra www.viradafest.com.br no celular e confira.
+
+TROCAR O LINK DE COMPRA, WHATSAPP, VÍDEO, ANALYTICS E PIXEL
+- Edite SOMENTE o arquivo assets/js/config.js (abre no Bloco de Notas).
+- comprarUrl: link da 4Ticket (ou outra). Todos os botões de compra usam esse link.
+  Enquanto estiver vazio, os botões abrem o WhatsApp.
+- whatsapp: número principal (botão flutuante).
+- whatsappContatos: outros WhatsApps que aparecem no rodapé.
+- vendasAbremEm / vendasAviso: até essa data os botões mostram o aviso "vendas ainda não começaram".
+- precos: valores que aparecem nos cartões dos setores.
+- videoUrl: link do YouTube ou arquivo .mp4. Vazio = seção de vídeo escondida.
+- ga4Id / metaPixelId: códigos do Google Analytics e do Pixel da Meta.
+- Depois de editar, envie de novo só o config.js pelo FTP.
+
+EDITAR AS RESPOSTAS DAS DÚVIDAS
+- No index.html, procure por "EDITAR AQUI". Cada pergunta está entre <details> ... </details>.
+  Troque só o texto dentro de <p> ... </p>.
+
+TROCAR FOTOS
+- Galeria: assets/img/g01-thumb.webp ... g16-thumb.webp (miniatura 600x750)
+  e g01-full.webp ... g16-full.webp (foto ampliada). Mantenha os mesmos nomes.
+- Capa: assets/img/hero-*.webp. Local: assets/img/local-*.webp.
+
+O QUE AINDA FALTA CONFIRMAR (não foi inventado nada no site)
+- Link de compra, horário, valores/lotes, classificação etária, lista do open bar,
+  cardápio, atrações, estacionamento, política de transferência, WhatsApp oficial,
+  logo oficial em alta, vídeo, autorização de uso das fotos da Casa Pampulha.
+- Textos de Política de privacidade e Termos de uso: revisar com a organização.

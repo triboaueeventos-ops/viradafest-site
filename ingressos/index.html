@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Ingressos | Réveillon Virada Fest 2027</title>
+  <!-- Usa o link e a data de abertura do assets/js/config.js (não precisa editar este arquivo). -->
+  <script src="../assets/js/config.js"></script>
+  <script>
+    (function () {
+      var C = window.VF_CONFIG || {};
+      var link = String(C.comprarUrl || '').trim();
+      var abre = C.vendasAbremEm ? new Date(C.vendasAbremEm).getTime() : 0;
+      var destino = (link && (!abre || Date.now() >= abre)) ? link : '../#setores';
+      location.replace(destino);
+    })();
+  </script>
+</head>
+<body style="font-family:system-ui,sans-serif;padding:24px">
+  <p>Redirecionando… <a href="../">Voltar para o site</a></p>
+</body>
+</html>
