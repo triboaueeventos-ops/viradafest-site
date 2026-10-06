@@ -40,7 +40,8 @@ window.VF_CONFIG = {
   videoUrl: '',
   videoCapa: 'assets/img/local-lounge-900.webp',
 
-  // Google Analytics 4 (ex: G-XXXXXXXXXX). Vazio = desligado.
+  // Google Analytics: já está instalado direto no <head> do index.html (G-BDNSYNP9D8).
+  // Deixe vazio aqui para não contar visita em dobro.
   ga4Id: '',
 
   // Meta Pixel (somente números). Vazio = desligado.
