@@ -45,7 +45,8 @@ window.VF_CONFIG = {
   ga4Id: '',
 
   // Meta Pixel (somente números). Vazio = desligado.
-  metaPixelId: '',
+  // Pixel "pixels virada" (Business Spettim).
+  metaPixelId: '515619467882781',
 
   // Texto de "Produção / Realização" no rodapé. Vazio = não aparece.
   producao: 'BH Produções'

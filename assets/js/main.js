@@ -47,6 +47,7 @@
         e.preventDefault();
         if (aviso) abrirAviso();
         if (window.gtag) window.gtag('event', 'interesse_pre_venda');
+        if (window.fbq) window.fbq('trackCustom', 'InteressePreVenda');
       });
     }
   });
