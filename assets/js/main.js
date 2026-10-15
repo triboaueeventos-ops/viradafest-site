@@ -9,8 +9,30 @@
     return 'https://wa.me/' + num + (C.whatsappMensagem ? '?text=' + encodeURIComponent(C.whatsappMensagem) : '');
   }
 
+  /* ---------- Etiqueta do anúncio (utm, fbclid, gclid) ---------- */
+  // Guarda de onde a pessoa veio e repassa para o link de compra,
+  // para a venda na 4Ticket ficar ligada ao anúncio que ela clicou.
+  var RASTRO = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'];
+  function lerRastro() {
+    var atual = {}, salvo = {};
+    try { var q = new URLSearchParams(location.search); RASTRO.forEach(function (k) { if (q.get(k)) atual[k] = q.get(k); }); } catch (e) {}
+    try { salvo = JSON.parse(sessionStorage.getItem('vf_rastro') || '{}') || {}; } catch (e) {}
+    var r = Object.keys(atual).length ? atual : salvo;
+    try { if (Object.keys(atual).length) sessionStorage.setItem('vf_rastro', JSON.stringify(atual)); } catch (e) {}
+    return r;
+  }
+  function comRastro(url) {
+    var r = lerRastro();
+    if (!url || !Object.keys(r).length) return url;
+    try {
+      var u = new URL(url, location.href);
+      Object.keys(r).forEach(function (k) { if (!u.searchParams.has(k)) u.searchParams.set(k, r[k]); });
+      return u.toString();
+    } catch (e) { return url; }
+  }
+
   /* ---------- Links de compra (uma única fonte: config.js) ---------- */
-  var comprar = String(C.comprarUrl || '').trim();
+  var comprar = comRastro(String(C.comprarUrl || '').trim());
   var wa = waLink();
   // Antes da data de abertura (config.js > vendasAbremEm) os botões mostram um aviso em vez do link.
   var abre = C.vendasAbremEm ? new Date(C.vendasAbremEm) : null;

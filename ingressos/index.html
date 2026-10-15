@@ -13,6 +13,13 @@
       var link = String(C.comprarUrl || '').trim();
       var abre = C.vendasAbremEm ? new Date(C.vendasAbremEm).getTime() : 0;
       var destino = (link && (!abre || Date.now() >= abre)) ? link : '../#setores';
+      if (destino === link && location.search) {
+        try {
+          var u = new URL(link), q = new URLSearchParams(location.search);
+          ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(function (k) { if (q.get(k) && !u.searchParams.has(k)) u.searchParams.set(k, q.get(k)); });
+          destino = u.toString();
+        } catch (e) {}
+      }
       location.replace(destino);
     })();
   </script>
