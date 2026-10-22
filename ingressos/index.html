@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <title>Ingressos | Réveillon Virada Fest 2027</title>
+
+  <!-- Google Analytics (registra a visita e o clique em comprar antes de ir pra 4Ticket) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BDNSYNP9D8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BDNSYNP9D8');
+  </script>
+
+  <!-- Meta Pixel (pixels virada) -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '515619467882781');
+    fbq('track', 'PageView');
+  </script>
+
   <!-- Usa o link e a data de abertura do assets/js/config.js (não precisa editar este arquivo). -->
   <script src="../assets/js/config.js"></script>
   <script>
@@ -12,19 +33,36 @@
       var C = window.VF_CONFIG || {};
       var link = String(C.comprarUrl || '').trim();
       var abre = C.vendasAbremEm ? new Date(C.vendasAbremEm).getTime() : 0;
-      var destino = (link && (!abre || Date.now() >= abre)) ? link : '../#setores';
-      if (destino === link && location.search) {
+      var vendasAbertas = !!link && (!abre || Date.now() >= abre);
+      var destino = vendasAbertas ? link : '../#setores';
+      if (vendasAbertas && location.search) {
         try {
           var u = new URL(link), q = new URLSearchParams(location.search);
           ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(function (k) { if (q.get(k) && !u.searchParams.has(k)) u.searchParams.set(k, q.get(k)); });
           destino = u.toString();
         } catch (e) {}
       }
-      location.replace(destino);
+
+      var foi = false;
+      function ir() { if (foi) return; foi = true; location.replace(destino); }
+
+      if (vendasAbertas) {
+        try { fbq('track', 'InitiateCheckout'); } catch (e) {}
+        try {
+          gtag('event', 'begin_checkout', {
+            currency: 'BRL',
+            items: [{ item_name: 'Réveillon Virada Fest 2027' }],
+            transport_type: 'beacon',
+            event_callback: ir
+          });
+        } catch (e) {}
+      }
+      // Espera no máximo 1 segundo pra registrar e segue pra compra.
+      setTimeout(ir, vendasAbertas ? 1000 : 0);
     })();
   </script>
 </head>
-<body style="font-family:system-ui,sans-serif;padding:24px">
-  <p>Redirecionando… <a href="../">Voltar para o site</a></p>
+<body style="font-family:system-ui,sans-serif;padding:24px;background:#F1EEE8;color:#3A2F20">
+  <p>Abrindo a página de ingressos… <a href="../" style="color:#8C6A2F">Voltar para o site</a></p>
 </body>
 </html>
